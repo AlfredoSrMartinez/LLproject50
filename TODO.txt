@@ -1,0 +1,5 @@
+check for collision why takes so much
+check why the segments appears so far away
+check for dt 
+berry spawning off screen
+body moving when moving but not when stayed
