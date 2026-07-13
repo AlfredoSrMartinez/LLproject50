@@ -1,3 +1,4 @@
+--arch linux 
 local hex = require("libs.hexmaniac")
 local snake
 local score 
