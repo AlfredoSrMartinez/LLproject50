@@ -11,8 +11,8 @@ function love.load()
 	snake = {}
 	snake.x_position = 0
 	snake.y_position = 0
-	snake.width = 1
-	snake.height = 1
+	snake.width = 20
+	snake.height = 20
 	snake.speed = 100
 
 	--here we declare the body of the snake gemini involved
@@ -25,8 +25,8 @@ function love.load()
 	berry = {}
 	berry.x_position = love.math.random(0,800)
 	berry.y_position = love.math.random(0,600)
-	berry.berry_width = 1
-	berry.berry_height = 1
+	berry.berry_width = 20
+	berry.berry_height = 20
 
 	--score variable to just upload the value 
 	score = 0
@@ -34,6 +34,7 @@ end
 
 --updating the game state
 function love.update(dt)
+
 	if love.keyboard.isDown("right",'d') then
         snake.x_position = snake.x_position + snake.speed * dt
     end    
@@ -73,9 +74,10 @@ function love.update(dt)
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
-  return x1 < x2+w2 and
-         x2 < x1+w1 and
-         y1 < y2+h2 and         y2 < y1+h1
+  	return 	x1 < x2+w2 and
+         	x2 < x1+w1 and
+         	y1 < y2+h2 and         
+         	y2 < y1+h1
 end
 
 --drawing the state on the screen
