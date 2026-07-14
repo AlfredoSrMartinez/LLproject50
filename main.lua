@@ -19,19 +19,21 @@ function love.load()
 	snake_segments.x_position = 0
 	snake_segments.y_position = 0
 
+	--here we declare the fruit the snake eat to grow appears at any location in the
+	--screen limits 
 	berry = {}
 	berry.x_position = love.math.random(0,800)
 	berry.y_position = love.math.random(0,600)
 	berry.berry_width = 1
 	berry.berry_height = 1
 
+	--score variable to just upload the value 
 	score = 0
 end
 
 --updating the game state
 function love.update(dt)
 	if love.keyboard.isDown("right",'d') then
-
         snake.x_position = snake.x_position + snake.speed * dt
     end    
 
@@ -52,6 +54,7 @@ function love.update(dt)
    	end
 
    	--gemini to check why not working score goes up and segment never reaches 2 iguess
+	--check the collision of the objects via the function with AABB the score updates    	
    	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, berry.x_position,berry.y_position,berry.berry_width,berry.berry_height)) then
 		score = score + 1
 		print("score = " .. score)
@@ -60,10 +63,11 @@ function love.update(dt)
 	end
 
    	--how to do a for and fix it snake segments only a table with mini table
+    --the snake body need to check later 
    	for i = score, 2 , -1 do
    		snake_segments[i] = snake_segments[i-1]
    	end
-
+   	--snake body mini table with x position and y position
    	snake_segments[1] = {x_position = snake.x_position, y_position = snake.y_position}
 end
 
