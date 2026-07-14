@@ -1,12 +1,12 @@
---arch linux 
 local hex = require("libs.hexmaniac")
 local snake
 local score 
 
 --setting up the game state
 function love.load()
+	--the mouse is hidden to not bother when playing the game 
 	love.mouse.setVisible(false)
-
+	--here we declare the snake values TODO abstract the code to another file
 	snake = {}
 	snake.x_position = 0
 	snake.y_position = 0
@@ -14,8 +14,8 @@ function love.load()
 	snake.height = 1
 	snake.speed = 150
 
+	--here we declare the body of the snake gemini involved
 	snake_segments = {}
-	--change the way of the max lenght array and how to use tables inside tables 	
 	snake_segments.x_position = 0
 	snake_segments.y_position = 0
 
