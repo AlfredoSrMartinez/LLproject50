@@ -6,13 +6,14 @@ local score
 function love.load()
 	--the mouse is hidden to not bother when playing the game 
 	love.mouse.setVisible(false)
+	love.graphics.setNewFont(30)
 	--here we declare the snake values TODO abstract the code to another file
 	snake = {}
 	snake.x_position = 0
 	snake.y_position = 0
 	snake.width = 1
 	snake.height = 1
-	snake.speed = 150
+	snake.speed = 100
 
 	--here we declare the body of the snake gemini involved
 	snake_segments = {}
@@ -74,13 +75,13 @@ end
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
   return x1 < x2+w2 and
          x2 < x1+w1 and
-         y1 < y2+h2 and
-         y2 < y1+h1
+         y1 < y2+h2 and         y2 < y1+h1
 end
 
 --drawing the state on the screen
 function love.draw()
 	love.graphics.setBackgroundColor(hex.rgb('508a3d'))
+	love.graphics.setColor(hex.rgb('fafa07'))
 	--gemini error en el for 
 	for i = 1, score do 
 		love.graphics.print( "o", snake_segments[i].x_position, snake_segments[i].y_position)
@@ -88,4 +89,4 @@ function love.draw()
 	love.graphics.print( "O", snake.x_position, snake.y_position)
 	love.graphics.print( "@", berry.x_position, berry.y_position)
 
-end
+end	
