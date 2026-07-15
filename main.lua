@@ -14,6 +14,13 @@ function love.load()
 	love.mouse.setVisible(false)
 	love.graphics.setNewFont(30)
 
+	--sounds 
+	background_music = love.audio.newSource("assets/audio/music/MGS3 OST_ On the Ground - Metal Gear Solid 3_ Snake Eater.mp3", "stream")
+	damage_taken = love.audio.newSource("assets/audio/effects/damage_taken.wav", "static")
+	epic_victory = love.audio.newSource("assets/audio/effects/win.wav", "static")
+	berry_eaten = love.audio.newSource("assets/audio/effects/eat_berry.wav", "static")
+
+
 	--berry values
 	screen_width = 800
 	screen_height = 600
@@ -52,6 +59,7 @@ end
 
 --updating the game state
 function love.update(dt)
+	background_music:play()
 	if input then
 		--suggestion made by gemini
 		if love.keyboard.isDown("right",'d') and snake.current_direction ~= "left" then
@@ -62,11 +70,11 @@ function love.update(dt)
     		snake.current_direction = "left"
         	head = '<'
 
-    	elseif love.keyboard.isDown("up",'w') then
+    	elseif love.keyboard.isDown("up",'w') and snake.current_direction ~= "down" then
         	snake.current_direction = "up"
         	head = '^'
 
-    	elseif love.keyboard.isDown("down",'s') then
+    	elseif love.keyboard.isDown("down",'s') and snake.current_direction ~= "up" then
         	snake.current_direction = "down"
         	head = 'v'
     	end  
@@ -99,7 +107,6 @@ function love.update(dt)
 
     	berry.x_position = love.math.random(0,screen_width - 50)
 		berry.y_position = love.math.random(0,screen_height - 50)
-
    	end
 
    	if love.keyboard.isDown('o') then
@@ -112,6 +119,7 @@ function love.update(dt)
 			print("score = " .. score)
 			berry.x_position = love.math.random(0,screen_width - 50)
 			berry.y_position = love.math.random(0,screen_height - 50)
+			berry_eaten:play()
 	end
 
    	--how to do a for and fix it snake segments only a table with mini table
@@ -130,11 +138,13 @@ function love.update(dt)
     	timer = 0
 	end
 
-	for i = 4, #snake_segments do
+	-- gemini help maaking this 
+	for i = 5, #snake_segments do
     	if CheckCollision(snake.x_position, snake.y_position, snake.width, snake.height, snake_segments[i].x_position, snake_segments[i].y_position, 20, 20) then
         	game_state = "game_over"
         	snake.current_direction = "stop"
         	input = false
+        	damage_taken:play()
         end
     end
 
@@ -142,12 +152,14 @@ function love.update(dt)
    	if (score >= 256) then
    		game_state = "epic_victory"
    		input = false
+   		epic_victory:play()
    	end
 
-   	if(snake.x_position <= 22 or snake.y_position <= 22 or snake.x_position >= 757 or snake.y_position >= 546) then
+   	if(snake.x_position <= 22 or snake.y_position <= 22 or snake.x_position >= 757 or snake.y_position >= 546) and game_state == "game_on" then
    		game_state = "game_over"
    		snake.current_direction = "stop"
    		input = false
+   		damage_taken:play()
    	end
 end
 
@@ -160,8 +172,8 @@ end
 
 --drawing the state on the screen
 function love.draw()
-	love.graphics.setBackgroundColor(hex.rgb('508a3d'))
-	love.graphics.setColor(hex.rgb('fafa07'))
+	love.graphics.setBackgroundColor(hex.rgb('011A00'))
+	love.graphics.setColor(hex.rgb('046508'))
 
 	--top side x, y 
 	for i = -7, 275 do
