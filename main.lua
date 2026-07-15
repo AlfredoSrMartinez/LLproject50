@@ -34,8 +34,8 @@ function love.load()
 	--here we declare the fruit the snake eat to grow appears at any location in the
 	--screen limits 
 	berry = {}
-	berry.x_position = love.math.random(0,screen_width - 25)
-	berry.y_position = love.math.random(0,screen_height - 25)
+	berry.x_position = love.math.random(0,screen_width - 40)
+	berry.y_position = love.math.random(0,screen_height - 40)
 	berry.berry_width = 20
 	berry.berry_height = 20
 
@@ -78,9 +78,10 @@ function love.update(dt)
     	score = 0
     	input = true
     	game_state = "game_on"
+    	snake_segments = {}
 
-    	berry.x_position = love.math.random(0,screen_width - 25)
-		berry.y_position = love.math.random(0,screen_height - 25)
+    	berry.x_position = love.math.random(0,screen_width - 40)
+		berry.y_position = love.math.random(0,screen_height - 40)
 
    	end
 
@@ -92,8 +93,8 @@ function love.update(dt)
    	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, berry.x_position,berry.y_position,berry.berry_width,berry.berry_height)) then
 			score = score + 1
 			print("score = " .. score)
-			berry.x_position = love.math.random(0,screen_width - 25)
-			berry.y_position = love.math.random(0,screen_height - 25)
+			berry.x_position = love.math.random(0,screen_width - 40)
+			berry.y_position = love.math.random(0,screen_height - 40)
 	end
 
    	--how to do a for and fix it snake segments only a table with mini table
@@ -105,12 +106,12 @@ function love.update(dt)
    	--snake body mini table with x position and y position
    	snake_segments[1] = {x_position = snake.x_position-2, y_position = snake.y_position-2}
 
-   	if (score == 256) then
+   	if (score >= 256) then
    		game_state = "epic_victory"
    		input = false
    	end
 
-   	if(snake.x_position <= 0 or snake.y_position <= 0 or snake.x_position >= 800 or snake.y_position >= 600) then
+   	if(snake.x_position <= 22 or snake.y_position <= 22 or snake.x_position >= 757 or snake.y_position >= 546) then
    		game_state = "game_over"
    		input = false
    	end
@@ -128,7 +129,7 @@ function love.draw()
 	love.graphics.setBackgroundColor(hex.rgb('508a3d'))
 	love.graphics.setColor(hex.rgb('fafa07'))
 
-	--top side 
+	--top side x, y 
 	for i = -7, 275 do
 		love.graphics.print("#",i,0)
 	end

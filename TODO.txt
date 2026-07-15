@@ -1,6 +1,4 @@
 
 snake segments not properly drawing and being encimated with the head 
 
-berry spawning off screen
-
-only game over with left border
+needs things to abstract
