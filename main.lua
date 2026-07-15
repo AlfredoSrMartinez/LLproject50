@@ -1,9 +1,11 @@
 local hex = require("libs.hexmaniac")
+local input
 local snake
 local score
 local head 
 local screen_width 
 local screen_height
+local game_state
 
 --setting up the game state
 function love.load()
@@ -38,41 +40,60 @@ function love.load()
 	berry.berry_height = 20
 
 	--score variable to just upload the value 
+	input = true
 	score = 0
 	head = '>'
+	--gemini remembered me about game states
+	game_state = "game_on"
 end
 
 --updating the game state
 function love.update(dt)
+	if input then
+		if love.keyboard.isDown("right",'d') then
+        	snake.x_position = snake.x_position + snake.speed * dt
+        	head = '>'    
 
-	if love.keyboard.isDown("right",'d') then
-        snake.x_position = snake.x_position + snake.speed * dt
-        head = '>'    
+    	elseif love.keyboard.isDown("left",'a') then
+        	snake.x_position = snake.x_position - snake.speed * dt
+        	head = '<'
 
-    elseif love.keyboard.isDown("left",'a') then
-        snake.x_position = snake.x_position - snake.speed * dt
-        head = '<'
+    	elseif love.keyboard.isDown("up",'w') then
+        	snake.y_position = snake.y_position - snake.speed * dt
+        	head = '^'
 
-    elseif love.keyboard.isDown("up",'w') then
-        snake.y_position = snake.y_position - snake.speed * dt
-        head = '^'
+    	elseif love.keyboard.isDown("down",'s') then
+        	snake.y_position = snake.y_position + snake.speed * dt
+        	head = 'v'
+    	end  
+   	end
 
-    elseif love.keyboard.isDown("down",'s') then
-        snake.y_position = snake.y_position + snake.speed * dt
-        head = 'v'
-    end  
-
-    if love.keyboard.isDown("escape") then
+   	if love.keyboard.isDown("escape") then
     	love.event.quit()
    	end
 
+   	if love.keyboard.isDown('r') then
+    	snake.x_position = 25
+    	snake.y_position = 25
+    	score = 0
+    	input = true
+    	game_state = "game_on"
+
+    	berry.x_position = love.math.random(0,screen_width - 25)
+		berry.y_position = love.math.random(0,screen_height - 25)
+
+   	end
+
+   	if love.keyboard.isDown('o') then
+    	score = score + 5
+   	end
    	--gemini to check why not working score goes up and segment never reaches 2 iguess
 	--check the collision of the objects via the function with AABB the score updates    	
    	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, berry.x_position,berry.y_position,berry.berry_width,berry.berry_height)) then
-		score = score + 1
-		print("score = " .. score)
-		berry.x_position = love.math.random(0,screen_width - 25)
-		berry.y_position = love.math.random(0,screen_height - 25)
+			score = score + 1
+			print("score = " .. score)
+			berry.x_position = love.math.random(0,screen_width - 25)
+			berry.y_position = love.math.random(0,screen_height - 25)
 	end
 
    	--how to do a for and fix it snake segments only a table with mini table
@@ -82,6 +103,15 @@ function love.update(dt)
    	end
    	--snake body mini table with x position and y position
    	snake_segments[1] = {x_position = snake.x_position-2, y_position = snake.y_position-2}
+
+   	if (score == 256) then
+   		love.graphics.print( "You Win!", screen_width - 495, 300)
+   	end
+
+   	if(snake.x_position <= 0 or snake.y_position <= 0 or snake.x_position >= 800 or snake.y_position >= 600) then
+   		game_state = "game_over"
+   		input = false
+   	end
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
@@ -97,7 +127,7 @@ function love.draw()
 	love.graphics.setColor(hex.rgb('fafa07'))
 
 	--top side 
-	for i = 0, 275 do
+	for i = -7, 275 do
 		love.graphics.print("#",i,0)
 	end
 	for i = 470, 779 do
@@ -123,4 +153,8 @@ function love.draw()
 	love.graphics.print( "" .. head, snake.x_position, snake.y_position)
 	love.graphics.print( "@", berry.x_position, berry.y_position)
 
+	if (game_state == "game_over") then
+		love.graphics.print( "GAME OVER", screen_width - 495, 100)
+		love.graphics.print( "Press R to restart!", screen_width - 495, 200)
+	end
 end	
