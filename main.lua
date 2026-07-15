@@ -130,6 +130,15 @@ function love.update(dt)
     	timer = 0
 	end
 
+	for i = 4, #snake_segments do
+    	if CheckCollision(snake.x_position, snake.y_position, snake.width, snake.height, snake_segments[i].x_position, snake_segments[i].y_position, 20, 20) then
+        	game_state = "game_over"
+        	snake.current_direction = "stop"
+        	input = false
+        end
+    end
+
+
    	if (score >= 256) then
    		game_state = "epic_victory"
    		input = false
