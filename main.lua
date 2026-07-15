@@ -1,5 +1,6 @@
 local hex = require("libs.hexmaniac")
 local input
+local timer
 local snake
 local score
 local head 
@@ -19,6 +20,7 @@ function love.load()
 
 	--here we declare the snake values TODO abstract the code to another file
 	snake = {}
+	snake.current_direction = "right"
 	snake.x_position = 25
 	snake.y_position = 25
 	--change the width-heihgt for better collision gemini suggestion
@@ -34,13 +36,14 @@ function love.load()
 	--here we declare the fruit the snake eat to grow appears at any location in the
 	--screen limits 
 	berry = {}
-	berry.x_position = love.math.random(0,screen_width - 40)
-	berry.y_position = love.math.random(0,screen_height - 40)
+	berry.x_position = love.math.random(0,screen_width - 50)
+	berry.y_position = love.math.random(0,screen_height - 50)
 	berry.berry_width = 20
 	berry.berry_height = 20
 
 	--score variable to just upload the value 
 	input = true
+	timer = 0
 	score = 0
 	head = '>'
 	--gemini remembered me about game states
@@ -50,23 +53,36 @@ end
 --updating the game state
 function love.update(dt)
 	if input then
-		if love.keyboard.isDown("right",'d') then
-        	snake.x_position = snake.x_position + snake.speed * dt
+		if love.keyboard.isDown("right",'d') and snake.current_direction ~= "left" then
+        	snake.current_direction = "right"
         	head = '>'    
 
-    	elseif love.keyboard.isDown("left",'a') then
-        	snake.x_position = snake.x_position - snake.speed * dt
+    	elseif love.keyboard.isDown("left",'a')  and snake.current_direction ~= "right" then
+    		snake.current_direction = "left"
         	head = '<'
 
     	elseif love.keyboard.isDown("up",'w') then
-        	snake.y_position = snake.y_position - snake.speed * dt
+        	snake.current_direction = "up"
         	head = '^'
 
     	elseif love.keyboard.isDown("down",'s') then
-        	snake.y_position = snake.y_position + snake.speed * dt
+        	snake.current_direction = "down"
         	head = 'v'
     	end  
    	end
+
+   	if snake.current_direction == "right" then 
+   		snake.x_position = snake.x_position + snake.speed * dt
+   	
+   	elseif snake.current_direction == "left" then
+   		snake.x_position = snake.x_position - snake.speed * dt
+
+   	elseif snake.current_direction == "up" then
+   		snake.y_position = snake.y_position - snake.speed * dt
+
+   	elseif snake.current_direction == "down" then
+   		snake.y_position = snake.y_position + snake.speed * dt
+   	end 
 
    	if love.keyboard.isDown("escape") then
     	love.event.quit()
@@ -80,8 +96,8 @@ function love.update(dt)
     	game_state = "game_on"
     	snake_segments = {}
 
-    	berry.x_position = love.math.random(0,screen_width - 40)
-		berry.y_position = love.math.random(0,screen_height - 40)
+    	berry.x_position = love.math.random(0,screen_width - 50)
+		berry.y_position = love.math.random(0,screen_height - 50)
 
    	end
 
@@ -93,18 +109,25 @@ function love.update(dt)
    	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, berry.x_position,berry.y_position,berry.berry_width,berry.berry_height)) then
 			score = score + 1
 			print("score = " .. score)
-			berry.x_position = love.math.random(0,screen_width - 40)
-			berry.y_position = love.math.random(0,screen_height - 40)
+			berry.x_position = love.math.random(0,screen_width - 50)
+			berry.y_position = love.math.random(0,screen_height - 50)
 	end
 
    	--how to do a for and fix it snake segments only a table with mini table
     --the snake body need to check later 
     --gemini remembered me about the # function in lua
-   	for i = score, 2 , -1 do
-   		snake_segments[i] = snake_segments[i-1]
-   	end
-   	--snake body mini table with x position and y position
-   	snake_segments[1] = {x_position = snake.x_position-2, y_position = snake.y_position-2}
+    --gemini fixed this
+	timer = timer + dt
+
+	if timer >= (snake.width / snake.speed) then
+        for i = score, 2 , -1 do
+        	snake_segments[i] = snake_segments[i-1]
+    	end
+    
+    	snake_segments[1] = {x_position = snake.x_position, y_position = snake.y_position}
+    	
+    	timer = 0
+	end
 
    	if (score >= 256) then
    		game_state = "epic_victory"
@@ -113,6 +136,7 @@ function love.update(dt)
 
    	if(snake.x_position <= 22 or snake.y_position <= 22 or snake.x_position >= 757 or snake.y_position >= 546) then
    		game_state = "game_over"
+   		snake.current_direction = "stop"
    		input = false
    	end
 end
