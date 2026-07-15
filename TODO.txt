@@ -1,7 +1,6 @@
 
-check why the segments appears so far away
-
+snake segments not properly drawing and being encimated with the head 
 
 berry spawning off screen
 
-body moving when moving but not when stayed 
+only game over with left border

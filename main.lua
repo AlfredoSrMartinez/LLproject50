@@ -98,6 +98,7 @@ function love.update(dt)
 
    	--how to do a for and fix it snake segments only a table with mini table
     --the snake body need to check later 
+    --gemini remembered me about the # function in lua
    	for i = score, 2 , -1 do
    		snake_segments[i] = snake_segments[i-1]
    	end
@@ -105,7 +106,8 @@ function love.update(dt)
    	snake_segments[1] = {x_position = snake.x_position-2, y_position = snake.y_position-2}
 
    	if (score == 256) then
-   		love.graphics.print( "You Win!", screen_width - 495, 300)
+   		game_state = "epic_victory"
+   		input = false
    	end
 
    	if(snake.x_position <= 0 or snake.y_position <= 0 or snake.x_position >= 800 or snake.y_position >= 600) then
@@ -146,8 +148,8 @@ function love.draw()
 		love.graphics.print("#",i,569)
 	end
 	--gemini error en el for 
-	for i = 1, score do 
-		love.graphics.print( "".. head, snake_segments[i].x_position, snake_segments[i].y_position)
+	for i = 1, #snake_segments do 
+		love.graphics.print( "".. head, snake_segments[i].x_position, snake_segments[i].y_position+2)
 	end
 	love.graphics.print( "SCORE: " .. score, screen_width - 495, 0)
 	love.graphics.print( "" .. head, snake.x_position, snake.y_position)
@@ -155,6 +157,11 @@ function love.draw()
 
 	if (game_state == "game_over") then
 		love.graphics.print( "GAME OVER", screen_width - 495, 100)
-		love.graphics.print( "Press R to restart!", screen_width - 495, 200)
+		love.graphics.print( "Press R to restart!", screen_width - 565, 200)
+	end
+
+	if (game_state == "epic_victory") then
+		love.graphics.print( "You win!", screen_width - 495, 100)
+		love.graphics.print( "Press R to restart!", screen_width - 565, 200)
 	end
 end	
