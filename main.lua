@@ -53,6 +53,7 @@ end
 --updating the game state
 function love.update(dt)
 	if input then
+		--suggestion made by gemini
 		if love.keyboard.isDown("right",'d') and snake.current_direction ~= "left" then
         	snake.current_direction = "right"
         	head = '>'    
