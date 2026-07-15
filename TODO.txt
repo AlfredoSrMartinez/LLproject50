@@ -1,7 +1,7 @@
-check for collision with AABB because it does not register properly
 
-check why the segments appears so far away in comparison to the body and they overlap
+check why the segments appears so far away
 
-berry chances of spawning off screen
 
-body only moves when the characther moves and the body does not follow the head correctly 
+berry spawning off screen
+
+body moving when moving but not when stayed 

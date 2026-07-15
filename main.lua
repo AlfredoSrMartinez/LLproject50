@@ -1,35 +1,45 @@
 local hex = require("libs.hexmaniac")
 local snake
-local score 
+local score
+local head 
+local screen_width 
+local screen_height
 
 --setting up the game state
 function love.load()
 	--the mouse is hidden to not bother when playing the game 
 	love.mouse.setVisible(false)
 	love.graphics.setNewFont(30)
+
+	--berry values
+	screen_width = 800
+	screen_height = 600
+
 	--here we declare the snake values TODO abstract the code to another file
 	snake = {}
-	snake.x_position = 0
-	snake.y_position = 0
+	snake.x_position = 25
+	snake.y_position = 25
+	--change the width-heihgt for better collision gemini suggestion
 	snake.width = 20
 	snake.height = 20
 	snake.speed = 100
 
 	--here we declare the body of the snake gemini involved
 	snake_segments = {}
-	snake_segments.x_position = 0
-	snake_segments.y_position = 0
+	snake_segments.x_position = 25
+	snake_segments.y_position = 25
 
 	--here we declare the fruit the snake eat to grow appears at any location in the
 	--screen limits 
 	berry = {}
-	berry.x_position = love.math.random(0,800)
-	berry.y_position = love.math.random(0,600)
+	berry.x_position = love.math.random(0,screen_width - 25)
+	berry.y_position = love.math.random(0,screen_height - 25)
 	berry.berry_width = 20
 	berry.berry_height = 20
 
 	--score variable to just upload the value 
 	score = 0
+	head = '>'
 end
 
 --updating the game state
@@ -37,18 +47,19 @@ function love.update(dt)
 
 	if love.keyboard.isDown("right",'d') then
         snake.x_position = snake.x_position + snake.speed * dt
-    end    
+        head = '>'    
 
-    if love.keyboard.isDown("left",'a') then
+    elseif love.keyboard.isDown("left",'a') then
         snake.x_position = snake.x_position - snake.speed * dt
-    end  
+        head = '<'
 
-    if love.keyboard.isDown("up",'w') then
+    elseif love.keyboard.isDown("up",'w') then
         snake.y_position = snake.y_position - snake.speed * dt
-    end    
+        head = '^'
 
-    if love.keyboard.isDown("down",'s') then
+    elseif love.keyboard.isDown("down",'s') then
         snake.y_position = snake.y_position + snake.speed * dt
+        head = 'v'
     end  
 
     if love.keyboard.isDown("escape") then
@@ -60,8 +71,8 @@ function love.update(dt)
    	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, berry.x_position,berry.y_position,berry.berry_width,berry.berry_height)) then
 		score = score + 1
 		print("score = " .. score)
-		berry.x_position = love.math.random(0,800)
-		berry.y_position = love.math.random(0,600)
+		berry.x_position = love.math.random(0,screen_width - 25)
+		berry.y_position = love.math.random(0,screen_height - 25)
 	end
 
    	--how to do a for and fix it snake segments only a table with mini table
@@ -70,7 +81,7 @@ function love.update(dt)
    		snake_segments[i] = snake_segments[i-1]
    	end
    	--snake body mini table with x position and y position
-   	snake_segments[1] = {x_position = snake.x_position, y_position = snake.y_position}
+   	snake_segments[1] = {x_position = snake.x_position-2, y_position = snake.y_position-2}
 end
 
 function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
@@ -84,11 +95,32 @@ end
 function love.draw()
 	love.graphics.setBackgroundColor(hex.rgb('508a3d'))
 	love.graphics.setColor(hex.rgb('fafa07'))
+
+	--top side 
+	for i = 0, 275 do
+		love.graphics.print("#",i,0)
+	end
+	for i = 470, 779 do
+		love.graphics.print("#",i,0)
+	end
+	--left side 
+	for i = 0, 569 do
+		love.graphics.print("#",0,i)
+	end
+	--right side 
+	for i = 0, 569 do
+		love.graphics.print("#",779,i)
+	end
+	--down side 
+	for i = 0, 779 do
+		love.graphics.print("#",i,569)
+	end
 	--gemini error en el for 
 	for i = 1, score do 
-		love.graphics.print( "o", snake_segments[i].x_position, snake_segments[i].y_position)
+		love.graphics.print( "".. head, snake_segments[i].x_position, snake_segments[i].y_position)
 	end
-	love.graphics.print( "O", snake.x_position, snake.y_position)
+	love.graphics.print( "SCORE: " .. score, screen_width - 495, 0)
+	love.graphics.print( "" .. head, snake.x_position, snake.y_position)
 	love.graphics.print( "@", berry.x_position, berry.y_position)
 
 end	
