@@ -1,3 +1,3 @@
-snake need to end when bumping with body 
-
+berry still appearing on the brders
 ABSTRACTION
+README

@@ -234,7 +234,6 @@ function love.draw()
 	love.graphics.print( "@", berry.x_position, berry.y_position)
 	love.graphics.print( "&", evil_berry.x_position, evil_berry.y_position)
 
-
 	if (game_state == "menu") then
 		love.graphics.draw(awesome_wallpaper, 0, 0)
 		love.graphics.print( "Press 1 to tart!", screen_width - 565, 200)
