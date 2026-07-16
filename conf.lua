@@ -1,7 +1,7 @@
 function love.conf(t)
 	t.version = "11.5"
 	t.window.title = "snake"
-	t.window.icon = "/assets/images/icon.jpg"
+	t.window.icon = "/assets/images/icons/icon.jpg"
 	t.window.width = 800
 	t.window.height = 600
 end

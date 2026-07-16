@@ -21,9 +21,9 @@ function love.load()
 	berry_eaten = love.audio.newSource("assets/audio/effects/eat_berry.wav", "static")
 
 	--images 
-	awesome_wallpaper = love.graphics.newImage("assets/images/epic_wallpaper.jpg")
-	le_defeat = love.graphics.newImage("assets/images/le_defeat.jpg")
-	le_win = love.graphics.newImage("assets/images/le_win.jpg")
+	awesome_wallpaper = love.graphics.newImage("assets/images/titlecards/epic_wallpaper.jpg")
+	le_defeat = love.graphics.newImage("assets/images/titlecards/le_defeat.jpg")
+	le_win = love.graphics.newImage("assets/images/titlecards/le_win.jpg")
 
 	--berry values
 	screen_width = 800
@@ -243,11 +243,11 @@ function love.draw()
 
 	if (game_state == "game_over") then
 		love.graphics.draw(le_defeat, 0, 0)
-		love.graphics.print( "Press R to restart!", screen_width - 565, 200)
+		love.graphics.print( "Press R to restart!", 490, 550)
 	end
 
 	if (game_state == "epic_victory") then
 		love.graphics.draw(le_win, 0, 0)
-		love.graphics.print( "Press R to restart!", screen_width - 565, 250)
+		love.graphics.print( "Press R to restart!", 490, 550)
 	end
 end	
