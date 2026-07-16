@@ -22,6 +22,8 @@ function love.load()
 
 	--images 
 	awesome_wallpaper = love.graphics.newImage("assets/images/epic_wallpaper.jpg")
+	le_defeat = love.graphics.newImage("assets/images/le_defeat.jpg")
+	le_win = love.graphics.newImage("assets/images/le_win.jpg")
 
 	--berry values
 	screen_width = 800
@@ -237,12 +239,12 @@ function love.draw()
 	end
 
 	if (game_state == "game_over") then
-		love.graphics.print( "GAME OVER", screen_width - 495, 100)
+		love.graphics.draw(le_defeat, 0, 0)
 		love.graphics.print( "Press R to restart!", screen_width - 565, 200)
 	end
 
 	if (game_state == "epic_victory") then
-		love.graphics.print( "You win!", screen_width - 495, 100)
-		love.graphics.print( "Press R to restart!", screen_width - 565, 200)
+		love.graphics.draw(le_win, 0, 0)
+		love.graphics.print( "Press R to restart!", screen_width - 565, 250)
 	end
 end	
