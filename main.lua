@@ -117,6 +117,9 @@ function love.update(dt)
 
     	berry.x_position = love.math.random(0,screen_width - 50)
 		berry.y_position = love.math.random(0,screen_height - 50)
+
+		evil_berry.x_position = -10
+		evil_berry.y_position = -10
    	end
 
    	if love.keyboard.isDown('1') then
@@ -207,7 +210,7 @@ function love.draw()
 	for i = -7, 275 do
 		love.graphics.print("#",i,0)
 	end
-	for i = 470, 779 do
+	for i = 490, 779 do
 		love.graphics.print("#",i,0)
 	end
 	--left side 
