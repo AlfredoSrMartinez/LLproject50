@@ -26,8 +26,8 @@ function love.load()
 	le_win = love.graphics.newImage("assets/images/titlecards/le_win.jpg")
 
 	--berry values
-	screen_width = 800
-	screen_height = 600
+	screen_width = 757
+	screen_height = 546
 
 	--here we declare the snake values TODO abstract the code to another file
 	snake = {}
@@ -47,8 +47,8 @@ function love.load()
 	--here we declare the fruit the snake eat to grow appears at any location in the
 	--screen limits 
 	berry = {}
-	berry.x_position = love.math.random(0,screen_width - 50)
-	berry.y_position = love.math.random(0,screen_height - 50)
+	berry.x_position = love.math.random(25,screen_width)
+	berry.y_position = love.math.random(25,screen_height)
 	berry.berry_width = 20
 	berry.berry_height = 20
 
@@ -115,8 +115,8 @@ function love.update(dt)
     	game_state = "game_on"
     	snake_segments = {}
 
-    	berry.x_position = love.math.random(0,screen_width - 50)
-		berry.y_position = love.math.random(0,screen_height - 50)
+    	berry.x_position = love.math.random(25,screen_width)
+		berry.y_position = love.math.random(25,screen_height)
 
 		evil_berry.x_position = -10
 		evil_berry.y_position = -10
@@ -135,16 +135,16 @@ function love.update(dt)
    	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, berry.x_position,berry.y_position,berry.berry_width,berry.berry_height)) then
 			score = score + 1
 			print("score = " .. score)
-			berry.x_position = love.math.random(0,screen_width - 50)
-			berry.y_position = love.math.random(0,screen_height - 50)
+			berry.x_position = love.math.random(25,screen_width)
+			berry.y_position = love.math.random(25,screen_height)
 			berry_eaten:play()
 	end
 
 	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, evil_berry.x_position,evil_berry.y_position,evil_berry.evil_berry_width,evil_berry.evil_berry_height)) then
 			score = score - 1
 			print("score = " .. score)
-			evil_berry.x_position = love.math.random(0,screen_width - 200)
-			evil_berry.y_position = love.math.random(0,screen_height - 200)
+			evil_berry.x_position = love.math.random(25, screen_width-100)
+			evil_berry.y_position = love.math.random(25, screen_height-100)
 			berry_eaten:play()
 	end
 
@@ -175,8 +175,8 @@ function love.update(dt)
     end
 
     if (score == 10) then
-    	evil_berry.x_position = love.math.random(0,screen_width - 200)
-		evil_berry.y_position = love.math.random(0,screen_height - 200)
+    	evil_berry.x_position = love.math.random(25,screen_width-100)
+		evil_berry.y_position = love.math.random(25,screen_height-100)
    	end
 
    	if (score >= 256) then
@@ -229,7 +229,7 @@ function love.draw()
 	for i = 1, #snake_segments do 
 		love.graphics.print( "".. head, snake_segments[i].x_position, snake_segments[i].y_position+2)
 	end
-	love.graphics.print( "SCORE: " .. score, screen_width - 495, 0)
+	love.graphics.print( "SCORE: " .. score, screen_width - 455, 0)
 	love.graphics.print( "" .. head, snake.x_position, snake.y_position)
 	love.graphics.print( "@", berry.x_position, berry.y_position)
 	love.graphics.print( "&", evil_berry.x_position, evil_berry.y_position)
