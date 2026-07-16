@@ -25,7 +25,8 @@ function love.load()
 	le_defeat = love.graphics.newImage("assets/images/titlecards/le_defeat.jpg")
 	le_win = love.graphics.newImage("assets/images/titlecards/le_win.jpg")
 
-	--berry values
+	--berry values 
+	--screne values to adjust to the real vlause of the walls
 	screen_width = 757
 	screen_height = 546
 
@@ -138,6 +139,10 @@ function love.update(dt)
 			berry.x_position = love.math.random(25,screen_width)
 			berry.y_position = love.math.random(25,screen_height)
 			berry_eaten:play()
+			if (score == 10) then
+    		evil_berry.x_position = love.math.random(25,screen_width-100)
+			evil_berry.y_position = love.math.random(25,screen_height-100)
+   		end
 	end
 
 	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, evil_berry.x_position,evil_berry.y_position,evil_berry.evil_berry_width,evil_berry.evil_berry_height)) then
@@ -174,10 +179,6 @@ function love.update(dt)
         end
     end
 
-    if (score == 10) then
-    	evil_berry.x_position = love.math.random(25,screen_width-100)
-		evil_berry.y_position = love.math.random(25,screen_height-100)
-   	end
 
    	if (score >= 256) then
    		game_state = "epic_victory"
