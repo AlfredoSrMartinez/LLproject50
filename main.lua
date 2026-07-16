@@ -15,11 +15,13 @@ function love.load()
 	love.graphics.setNewFont(30)
 
 	--sounds 
-	background_music = love.audio.newSource("assets/audio/music/MGS3 OST_ On the Ground - Metal Gear Solid 3_ Snake Eater.mp3", "stream")
+	background_music = love.audio.newSource("assets/audio/music/Donkey Kong Country OST (Super Nintendo) - Track 0623 - Bonus Room Blitz.mp3", "stream")
 	damage_taken = love.audio.newSource("assets/audio/effects/damage_taken.wav", "static")
 	epic_victory = love.audio.newSource("assets/audio/effects/win.wav", "static")
 	berry_eaten = love.audio.newSource("assets/audio/effects/eat_berry.wav", "static")
 
+	--images 
+	awesome_wallpaper = love.graphics.newImage("assets/images/epic_wallpaper.jpg")
 
 	--berry values
 	screen_width = 800
@@ -48,13 +50,19 @@ function love.load()
 	berry.berry_width = 20
 	berry.berry_height = 20
 
+	evil_berry = {}
+	evil_berry.x_position = -10
+	evil_berry.y_position = -10
+	evil_berry.evil_berry_width = 20
+	evil_berry.evil_berry_height = 20
+
 	--score variable to just upload the value 
 	input = true
 	timer = 0
 	score = 0
 	head = '>'
 	--gemini remembered me about game states
-	game_state = "game_on"
+	game_state = "menu"
 end
 
 --updating the game state
@@ -109,6 +117,11 @@ function love.update(dt)
 		berry.y_position = love.math.random(0,screen_height - 50)
    	end
 
+   	if love.keyboard.isDown('1') then
+    	game_state = "game_on"
+    	snake.current_direction = "right"
+   	end
+
    	if love.keyboard.isDown('o') then
     	score = score + 5
    	end
@@ -119,6 +132,14 @@ function love.update(dt)
 			print("score = " .. score)
 			berry.x_position = love.math.random(0,screen_width - 50)
 			berry.y_position = love.math.random(0,screen_height - 50)
+			berry_eaten:play()
+	end
+
+	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, evil_berry.x_position,evil_berry.y_position,evil_berry.evil_berry_width,evil_berry.evil_berry_height)) then
+			score = score - 1
+			print("score = " .. score)
+			evil_berry.x_position = love.math.random(0,screen_width - 200)
+			evil_berry.y_position = love.math.random(0,screen_height - 200)
 			berry_eaten:play()
 	end
 
@@ -148,6 +169,10 @@ function love.update(dt)
         end
     end
 
+    if (score == 10) then
+    	evil_berry.x_position = love.math.random(0,screen_width - 200)
+		evil_berry.y_position = love.math.random(0,screen_height - 200)
+   	end
 
    	if (score >= 256) then
    		game_state = "epic_victory"
@@ -173,6 +198,7 @@ end
 --drawing the state on the screen
 function love.draw()
 	love.graphics.setBackgroundColor(hex.rgb('011A00'))
+
 	love.graphics.setColor(hex.rgb('046508'))
 
 	--top side x, y 
@@ -201,6 +227,14 @@ function love.draw()
 	love.graphics.print( "SCORE: " .. score, screen_width - 495, 0)
 	love.graphics.print( "" .. head, snake.x_position, snake.y_position)
 	love.graphics.print( "@", berry.x_position, berry.y_position)
+	love.graphics.print( "&", evil_berry.x_position, evil_berry.y_position)
+
+
+	if (game_state == "menu") then
+		love.graphics.draw(awesome_wallpaper, 0, 0)
+		love.graphics.print( "Press 1 to tart!", screen_width - 565, 200)
+		snake.current_direction = "stop"
+	end
 
 	if (game_state == "game_over") then
 		love.graphics.print( "GAME OVER", screen_width - 495, 100)
