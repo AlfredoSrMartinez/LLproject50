@@ -1,7 +1,7 @@
 # SNAKE EAT BERRIES THE GAME
 ## Video Demo:  <URL HERE>
 ## Description: 
-This is a project I have been working on for the past few days,  I have been struggling with coding for a while, to improve my skills I decided to build a project with a small scope, at first i tried making a videogame but soon i found that i was not ready for it all and i had to change the project to a smaller one and then i remembered the videos where people do snake the old nokia game in c in like 100 lines and i said that would be a cool project but for the sake of learning i decided to pick that tutorial but implement it in another language and enviroment so i decided to go with love2d and lua
+This is a project I have been working on for the past few days. I have been struggling with coding for a while, and to improve my skills I decided to build a project with a small scope. At first, I tried making a videogame but soon found that it was way harder than I thought. Later, I remembered that some people make videos about coding Snake in C. I thought that would be a cool project, but for the sake of learning, I decided to pick that concept and implement it in another language and environment. Because of this, I decided to go with LÖVE2D and Lua.
 
 ## Built with: 
 
@@ -23,7 +23,7 @@ This is a project I have been working on for the past few days,  I have been str
 
 ## Contact
 
-Alfredo Martinez -@twitter -martinezsralfredo@gmail.com
+Alfredo Martinez -@alfredomrtnz_ -martinezsralfredo@gmail.com
 
 Project Link: https://github.com/AlfredoSrMartinez/LLproject50
 
@@ -34,3 +34,5 @@ Project Link: https://github.com/AlfredoSrMartinez/LLproject50
 + Donkey Kong Country OST (Super Nintendo) - Track 0623 - Bonus Room Blitz
 ### libraries used
 + https://github.com/LavenderTheGreat/hexmaniac
+### ia implemented as a more potent rubber duck
++ gemini ai
