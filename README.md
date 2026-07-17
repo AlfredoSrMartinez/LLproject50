@@ -12,8 +12,21 @@ This is a project I have been working on for the past few days. I have been stru
 ## Getting started
 
 ### Prerequisites
+To run this game, you need to have the LÖVE framework (LÖVE2D) installed on your computer. 
+You can download the appropriate version for your operating system (Windows, macOS, or Linux) from their official website:
+* [LÖVE - Free 2D Game Engine](https://love2d.org/)
 
 ### Installation 
+1. **Clone the repo:**
+
+Navigate to the project directory.
+
+Run the game using LÖVE:
+
+    On Windows: You can drag and drop the LLproject50 folder directly onto the love.exe shortcut, or run love . in your terminal inside the folder.
+
+    On macOS / Linux: Open your terminal, navigate to the folder containing main.lua, and type love .
+
 
 ## Usage
 ### Snake movement:
