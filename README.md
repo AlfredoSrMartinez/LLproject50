@@ -14,7 +14,7 @@ This is a project i have been working on for the past few days, i have been stru
 
 ### Installation 
 
-### Usage
+## Usage
 
-### Contact
+## Contact
 
