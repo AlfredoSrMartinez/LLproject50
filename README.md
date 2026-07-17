@@ -18,6 +18,11 @@ You can download the appropriate version for your operating system (Windows, mac
 
 ### Installation 
 1. **Clone the repo:**
+```sh
+
+git clone https://github.com/AlfredoSrMartinez/LLproject50.git
+
+```
 
 2. **Navigate to the project directory.**
 
@@ -48,4 +53,4 @@ Project Link: https://github.com/AlfredoSrMartinez/LLproject50
 ### libraries used
 + https://github.com/LavenderTheGreat/hexmaniac
 ### ia implemented as a more potent rubber duck
-+ gemini ai
++ Gemini AI
