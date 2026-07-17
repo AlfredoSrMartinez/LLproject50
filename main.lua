@@ -147,7 +147,7 @@ function love.update(dt)
 
 	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, evil_berry.x_position,evil_berry.y_position,evil_berry.evil_berry_width,evil_berry.evil_berry_height)) then
 			score = score - 1
-			print("score = " .. score)
+			print("score = " ..   score)
 			evil_berry.x_position = love.math.random(25, screen_width-100)
 			evil_berry.y_position = love.math.random(25, screen_height-100)
 			berry_eaten:play()
