@@ -18,3 +18,7 @@ This is a project i have been working on for the past few days, i have been stru
 
 ## Contact
 
+Alfredo Martinez -@twitter -martinezsralfredo@gmail.com
+
+Project Link: github
+
