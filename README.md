@@ -3,9 +3,15 @@
 ## Description: 
 This is a project I have been working on for the past few days. I have been struggling with coding for a while, and to improve my skills I decided to build a project with a small scope. At first, I tried making a videogame but soon found that it was way harder than I thought. Later, I remembered that some people make videos about coding Snake in C. I thought that would be a cool project, but for the sake of learning, I decided to pick that concept and implement it in another language and environment. Because of this, I decided to go with LÖVE2D and Lua.
 
-## Getting started
-
 ## File Summary
+
+1.- **main.lua**
+
+2.- **conf.lua**
+
+## Design Choices
+
+lorem ipsum
 
 ## Built with: 
 
@@ -13,7 +19,7 @@ This is a project I have been working on for the past few days. I have been stru
 + Lua 
 + MS Paint
 
-## Design Choices
+## Getting started
 
 ### Prerequisites
 To run this game, you need to have the LÖVE framework (LÖVE2D) installed on your computer. 
