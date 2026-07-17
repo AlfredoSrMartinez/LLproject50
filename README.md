@@ -19,13 +19,13 @@ You can download the appropriate version for your operating system (Windows, mac
 ### Installation 
 1. **Clone the repo:**
 
-Navigate to the project directory.
+2. **Navigate to the project directory.**
 
-Run the game using LÖVE:
+3. **Run the game using LÖVE:**
 
-    On Windows: You can drag and drop the LLproject50 folder directly onto the love.exe shortcut, or run love . in your terminal inside the folder.
++ On Windows: You can drag and drop the LLproject50 folder directly onto the love.exe shortcut, or run love . in your terminal inside the folder.
 
-    On macOS / Linux: Open your terminal, navigate to the folder containing main.lua, and type love .
++ On macOS / Linux: Open your terminal, navigate to the folder containing main.lua, and type love .
 
 
 ## Usage
