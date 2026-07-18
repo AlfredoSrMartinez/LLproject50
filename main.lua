@@ -1,3 +1,5 @@
+require ("src.utils")
+
 local hex = require("libs.hexmaniac")
 local input
 local timer
@@ -139,7 +141,7 @@ function love.update(dt)
 			berry.x_position = love.math.random(25,screen_width)
 			berry.y_position = love.math.random(25,screen_height)
 			berry_eaten:play()
-			if (score == 10) then
+		if (score == 10) then
     		evil_berry.x_position = love.math.random(25,screen_width-100)
 			evil_berry.y_position = love.math.random(25,screen_height-100)
    		end
