@@ -42,9 +42,6 @@ git clone https://github.com/AlfredoSrMartinez/LLproject50.git
 
 + On macOS / Linux: Open your terminal, navigate to the folder containing main.lua, and type love .
 
-
-
-
 ## Usage
 ### Snake movement:
 + (w, a, s, d) up, left, down, right

@@ -1,9 +1,9 @@
 require ("src.utils")
-require ("src.map")
-require ("src.snakes")
+require ("src.snake")
 require ("src.berries")
 
 local hex = require("libs.hexmaniac")
+local map = require ("src.map")
 local game_state
 local input
 local timer
@@ -34,7 +34,11 @@ function love.load()
 	screen_width = 757
 	screen_height = 546
 
-	snake = new_snake()
+	snake = new_snake("right", 25, 25, 20, 20, 100)
+
+	berry = new_berry(love.math.random(25,screen_width), love.math.random(25,screen_height), 20, 20, 1, '@')
+
+	evil_berry = new_berry(love.math.random(25,screen_width-100), love.math.random(25,screen_height-100), 20, 20, -1, '&')
 
 	input = true
 	timer = 0
@@ -46,6 +50,27 @@ end
 --updating the game state
 function love.update(dt)
 	background_music:play()
+
+	snake:update(dt,score)
+
+	if love.keyboard.isDown("escape") then
+    	love.event.quit()
+   	end
+
+   	if love.keyboard.isDown('o') then
+    	score = score + 5
+   	end
+
+   	if love.keyboard.isDown('1') then
+    	game_state = "game_on"
+    	snake.current_direction = "right"
+   	end
+
+   	if (score >= 256) then
+   		game_state = "epic_victory"
+   		input = false
+   		epic_victory:play()
+   	end
 end
 
 --drawing the state on the screen
@@ -53,6 +78,13 @@ function love.draw()
 	love.graphics.setBackgroundColor(hex.rgb('011A00'))
 
 	love.graphics.setColor(hex.rgb('046508'))
+
+	snake:draw()
+	map.draw_borders()
+
+	love.graphics.print( "SCORE: " .. score, screen_width - 455, 0)
+	love.graphics.print( ""..berry.berry_sprite, berry.x_position, berry.y_position)
+	love.graphics.print( ""..evil_berry.berry_sprite, evil_berry.x_position, evil_berry.y_position)
 
 	if (game_state == "menu") then
 		love.graphics.draw(awesome_wallpaper, 0, 0)
