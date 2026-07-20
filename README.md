@@ -1,5 +1,5 @@
 # SNAKE EAT BERRIES THE GAME
-## Video Demo:  <URL HERE>
+## Video Demo:  <https://youtu.be/ZQw0JjUgFkM>
 ## Description: 
 This is a project I have been working on for the past few days. I have been struggling with coding for a while, and to improve my skills I decided to build a project with a small scope. At first, I tried making a videogame but soon found that it was way harder than I thought. Later, I remembered that some people make videos about coding Snake in C. I thought that would be a cool project, but for the sake of learning, I decided to pick that concept and implement it in another language and environment. Because of this, I decided to go with LÖVE2D and Lua.
 
