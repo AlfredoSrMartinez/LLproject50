@@ -6,7 +6,7 @@ This is a project I have been working on for the past few days. I have been stru
 ## File Summary
 
 1.- **main.lua**
-main file from the program it loads the library hexmaniac for color correction, and the map file for drawing the borders of the game, other useful variables such as game_State, input, timer, score for the game to work properly. In load the music, sound effects, graphics such as title cards and the variables already mentioned are intialized, with the functions snake and berry that we are going to talk about later in the readme. In update we make the snake and the music start, some additional controls are displayed such as escape, restart, and increasing the snake size, it also has the winning conditions, and the code that checks for the snake to collition with itself, with the borders, and the fruits. In draw the color of the background and the font is established, the snake and the map too, we print the score and the berries, and for last the game states conditions to display on the screen the current of them
+main file from the program it loads the library hexmaniac for color correction, and the map file for drawing the borders of the game, other useful variables such as game_State, input, timer, score for the game to work properly. In load the music, sound effects, graphics such as title cards and the variables already mentioned are initialized, with the functions snake and berry that we are going to talk about later in the readme. In update we make the snake and the music start, some additional controls are displayed such as escape, restart, and increasing the snake size, it also has the winning conditions, and the code that checks for the snake to collision with itself, with the borders, and the fruits. In draw the color of the background and the font is established, the snake and the map too, we print the score and the berries, and for last the game states conditions to display on the screen the current of them
 
 2.- **conf.lua**
 Here we just establish in the file the version of the love framework we are currently using, the title of the window, the icon of the same window, and the height and width
@@ -23,11 +23,12 @@ For modularity i decided to move the snake declaration and movement and the draw
 the movement involves that the snake can not move in the same direction making that it moves on the same point making it not keep moving so we implement the snake direction making it not possible to keep moving on its own center up down left or right
 
 6.- **utils.lua**
-Here we have the AABB collision function that just checks if the x position and y position with the height and with of object 1 enter in the x position and y position with the height and width of object 2 making everythingo of the above possible, the function is kept in another file for usage in other files
+Here we have the AABB collision function that just checks if the x position and y position with the height and with of object 1 enter in the x position and y position with the height and width of object 2 making everything of the above possible, the function is kept in another file for usage in other files
 
 ## Design Choices
 
-lorem ipsum
+I initially started taking the code someone else wrote to make snake in c, but they made this code thinking in the terminal so the snake moves in a grid type of things and it just updates less times, so the main conflict here in love framework was working with the framerate being 60fps it came with various problems such as the berries collisions with the snake originally the berrie would take place in a x position random in the screen, and the snake would just move with integers but here we have decimals on the screen and such and such so it was barely impossible for the berrie and the snake to found in the same position because of the framerate so to change that i increased the height and width of both of them for the collision to be easier to be found. Another design choice was to keep using the same sprites of ascii characters for simplicity instead of dealing with animation and that sort of things keeping it simple and paying homage to the original code
+Another design choice was to change the original main file to separate files to easier reading, easier fixing and making it professional
 
 ## Built with: 
 
