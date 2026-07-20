@@ -9,6 +9,14 @@ This is a project I have been working on for the past few days. I have been stru
 
 2.- **conf.lua**
 
+3.- **berries.lua**
+
+4.- **map.lua**
+
+5.- **snake.lua**
+
+6.- **utils.lua**
+
 ## Design Choices
 
 lorem ipsum

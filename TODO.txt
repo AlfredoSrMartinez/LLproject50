@@ -1,2 +1,4 @@
-ABSTRACTION
 README
+-file summary
+-design choices
+MAKE VIDEO 
