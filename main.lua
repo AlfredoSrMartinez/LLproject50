@@ -99,9 +99,9 @@ function love.update(dt)
    		epic_victory:play()
    	end
 
-   	--snake collitions
+   	--snake collisions
 
-   	--check for collition with snake´s own body
+   	--check for collisions with snake´s own body
 	for i = 5, #snake.snake_segments do
     	if CheckCollision(snake.x_position, snake.y_position, snake.width, snake.height, snake.snake_segments[i].x_position, snake.snake_segments[i].y_position, 20, 20) then
         	game_state = "game_over"
@@ -111,7 +111,7 @@ function love.update(dt)
         end
     end
 
-    --check for collition with berry to increase score, if score is more than 10 evil berries start to spawn
+    --check for collisions with berry to increase score, if score is more than 10 evil berries start to spawn
    	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, berry.x_position,berry.y_position,berry.berry_width,berry.berry_height)) then
 			score = score + berry.berry_score
 			print("score = " .. score)
@@ -124,7 +124,7 @@ function love.update(dt)
    		end
 	end
 
-	--check for collition with evil_berry to decrease score
+	--check for collisions with evil_berry to decrease score
 	if(CheckCollision(snake.x_position,snake.y_position,snake.width,snake.height, evil_berry.x_position,evil_berry.y_position,evil_berry.berry_width,evil_berry.berry_height)) then
 			score = score + evil_berry.berry_score 
 			print("score = " .. score)
@@ -133,7 +133,7 @@ function love.update(dt)
 			berry_eaten:play()
 	end
 
-	--check for collition with the limits of the screen
+	--check for collisions with the limits of the screen
    	if(snake.x_position <= 22 or snake.y_position <= 22 or snake.x_position >= 757 or snake.y_position >= 546) and game_state == "game_on" then
    		game_state = "game_over"
    		snake.current_direction = "stop"
